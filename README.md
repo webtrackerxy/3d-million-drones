@@ -7,6 +7,14 @@ Initial version: **v0.1.0 (experimental prerelease)**.
 Website: https://3d-million-drones.vercel.app
 Source: https://github.com/webtrackerxy/3d-million-drones
 
+## Documentation
+
+Start with the [reading guide](docs/readness.md), then explore:
+
+- [Architecture](docs/architecture.md): implemented ownership, packages and CPU/GPU pipeline.
+- [Data structures](docs/data-structures.md): missions, routes, packed records, map tiles and control state.
+- [Testing](docs/testing.md): commands, fixture coverage and browser/GPU validation limits.
+
 ## Run locally
 
 Use Node 24.x and the pinned Yarn 1.22.22 toolchain:

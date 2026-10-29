@@ -13,6 +13,10 @@ dist/
 
 # Local development and internal release artifacts
 reports/
-docs/
+docs/*
+!docs/readness.md
+!docs/architecture.md
+!docs/data-structures.md
+!docs/testing.md
 CONTEXT.md
 AGENTS.md
