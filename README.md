@@ -11,6 +11,7 @@ Source: https://github.com/webtrackerxy/3d-million-drones
 
 Start with the [reading guide](docs/readness.md), then explore:
 
+- [Folder structure](docs/folder-structure.md): repository tree, file locations and generated outputs.
 - [Architecture](docs/architecture.md): implemented ownership, packages and CPU/GPU pipeline.
 - [Data structures](docs/data-structures.md): missions, routes, packed records, map tiles and control state.
 - [Testing](docs/testing.md): commands, fixture coverage and browser/GPU validation limits.

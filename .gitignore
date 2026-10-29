@@ -18,5 +18,6 @@ docs/*
 !docs/architecture.md
 !docs/data-structures.md
 !docs/testing.md
+!docs/folder-structure.md
 CONTEXT.md
 AGENTS.md

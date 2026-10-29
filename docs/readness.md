@@ -21,9 +21,10 @@ does not mean the remaining browser/GPU, physical controller, soak or performanc
 | Order | Document | What to learn |
 | --- | --- | --- |
 | 1 | [README](../README.md) | Product overview, setup, controls, credits and limitations. |
-| 2 | [Architecture](architecture.md) | Current ownership, package boundaries, coordinates and CPU/GPU pipeline. |
-| 3 | [Data structures](data-structures.md) | Mission, route, descriptor, pose, rendering and map layouts. |
-| 4 | [Testing](testing.md) | Reproducible commands, fixture coverage and browser/GPU acceptance boundaries. |
+| 2 | [Folder structure](folder-structure.md) | Repository tree, key file locations and generated output folders. |
+| 3 | [Architecture](architecture.md) | Current ownership, package boundaries, coordinates and CPU/GPU pipeline. |
+| 4 | [Data structures](data-structures.md) | Mission, route, descriptor, pose, rendering and map layouts. |
+| 5 | [Testing](testing.md) | Reproducible commands, fixture coverage and browser/GPU acceptance boundaries. |
 
 ## Follow one drone through the code
 
