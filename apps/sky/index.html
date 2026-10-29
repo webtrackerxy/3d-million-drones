@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="A browser WebGPU experiment in mass aerial movement. Real drone meshes, GPU flight, individual identities."
+    />
+    <title>Million Drones — Greater London</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./src/style.css" />
+    <script type="module" src="./src/main.ts"></script>
+  </head>
+  <body>
+    <div id="canvas"></div>
+    <header class="topbar">
+      <a class="topbar-title" href="#/flights">Million Drones</a>
+      <a class="topbar-view" href="#/flights" data-guide-page="flights" aria-current="page">3D flights</a>
+      <nav class="menu-tabs" aria-label="Implementation guides"><a href="#/lod" data-guide-page="lod">LOD</a><a href="#/paths" data-guide-page="paths">Drone Paths</a><a href="#/simulation" data-guide-page="simulation">Simulation</a><a href="#/collision" data-guide-page="collision">Collision</a><a href="#/credit" data-guide-page="credit">Credit</a></nav>
+      <div class="live"><i></i><span id="backend">Initialising</span></div>
+      <button id="about">About</button>
+    </header>
+    <main id="flight-view" class="app">
+      <aside id="control-panel" class="panel" aria-label="Flight controls">
+        <div class="panel-header">
+          <div>
+            <h1>Flight controls</h1>
+            <p class="sub"><strong id="population-label">10,000</strong> drones · <span id="play-state">LIVE</span></p>
+          </div>
+          <button id="panel-toggle" class="panel-toggle" aria-expanded="true" aria-controls="panel-body" aria-label="Collapse panel">
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
+          </button>
+        </div>
+        <div id="panel-body" class="panel-body">
+<section id="manual-controls" class="manual-controls" aria-labelledby="manual-status" hidden>
+            <strong id="manual-status" role="status">Autopilot</strong>
+            <dl class="pilot-keys">
+              <div><dt><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></dt><dd>Move</dd></div>
+              <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Turn</dd></div>
+              <div><dt><kbd>E</kbd> / <kbd>Space</kbd></dt><dd>Rise</dd></div>
+              <div><dt><kbd>Q</kbd> / <kbd>C</kbd></dt><dd>Descend</dd></div>
+              <div><dt><kbd>I</kbd> / <kbd>K</kbd></dt><dd>Nose up / down</dd></div>
+              <div><dt><kbd>R</kbd></dt><dd>Level pitch</dd></div>
+              <div><dt><kbd>Z</kbd></dt><dd>Brake to hover</dd></div>
+              <div><dt><kbd>Shift</kbd></dt><dd>Boost</dd></div>
+            </dl>
+            <p>Gamepad: left stick moves · right stick turns/climbs · hold LT + right stick to pitch · LB levels · RB boosts · B returns.</p>
+            <div class="metric"><span>Pilot pitch</span><strong id="manual-pitch">0.0°</strong></div>
+            <p>Takeover keeps current motion and attitude. Move a stick/key to take over movement, or brake to hover.</p>
+            <p>Hold movement, turn or pitch keys to accelerate · release to brake. Shift raises the movement speed limit.</p>
+            <p>Pause and flight speed apply. Blue line = planned route. No automatic obstacle avoidance.</p>
+            <button id="brake-control">Brake to hover · Z / left-stick press</button>
+            <button id="release-control">Return to route · Esc</button>
+          </section>
+<section>
+            <h2>Flights</h2>
+            <label>Scene<select id="scenario">
+              <option value="london">Greater London</option><option value="city">Canary Wharf lab</option><option value="sky">Open sky benchmark</option>
+            </select></label>
+            <p id="scenario-detail" class="scenario-detail"></p>
+            <label>Population<select id="population">
+              <option value="10000">10,000 drones</option><option value="100000">100,000 drones</option><option value="250000">250,000 drones</option><option value="500000">500,000 drones</option><option value="1000000">1,000,000 drones</option>
+            </select></label>
+            <div class="row"><button id="pause">Pause</button><button id="reset">Restart</button></div>
+            <label class="range">Flight speed <span id="speed-label">1×</span><input id="speed" type="range" min="0" max="4" step="0.25" value="1" /></label>
+          </section><section>
+            <h2>Camera</h2>
+            <div class="camera-buttons"><button id="overview">Overview</button><button id="among">Among drones</button><button id="follow">Follow #42</button><button id="free">Free flight</button></div>
+            <div class="row segmented" role="group" aria-label="Map drag action"><button id="orbit-drag" aria-pressed="true">Orbit</button><button id="pan" aria-pressed="false">Pan map</button></div>
+            <p id="camera-help" class="sub">Drag to orbit · Shift-drag or middle-drag to pan · scroll to zoom. Right-click a drone to take control.</p>
+            <button id="capture">Save this view</button>
+          </section><section id="gamepad-controls">
+<h2>Gamepad</h2>
+<label class="toggle"><input id="gamepad-enabled" type="checkbox" checked /> Enable gamepad control</label>
+<label>Controller<select id="gamepad-device" disabled><option value="">Waiting for a controller…</option></select></label>
+<p id="gamepad-status" class="scenario-detail" role="status">Pair in system settings, then press any controller button.</p>
+<p class="scenario-detail">Click the flight canvas and release the sticks. A takes control; B returns to route. Left stick moves; right stick turns and climbs. Hold LT + right stick to pitch; LB levels. RB boosts; X follows; Start pauses; left-stick press brakes.</p>
+<details><summary>Mapping & setup</summary>
+<p>Bluetooth pairing happens in your system settings. Browser-standard controllers work automatically. For an unmapped Logitech controller, choose Custom and set its indices below.</p>
+<label>Layout<select id="gamepad-layout"><option value="standard">Automatic · browser standard</option><option value="custom">Custom axes and buttons</option></select></label>
+<div id="gamepad-custom" hidden><p>Indices start at 0. Each axis and button needs a distinct index.</p><label>Strafe axis<input id="pad-right" type="number" min="0" max="31" step="1" value="0" /></label><label>Forward axis<input id="pad-forward" type="number" min="0" max="31" step="1" value="1" /></label><label>Turn axis<input id="pad-turn" type="number" min="0" max="31" step="1" value="2" /></label><label>Climb axis<input id="pad-up" type="number" min="0" max="31" step="1" value="3" /></label><label class="toggle"><input id="pad-invert-forward" type="checkbox" checked /> Invert forward axis</label><label class="toggle"><input id="pad-invert-up" type="checkbox" checked /> Invert climb / pitch axis</label><label>Take control button<input id="pad-take" type="number" min="0" max="63" step="1" value="0" /></label><label>Return button<input id="pad-release" type="number" min="0" max="63" step="1" value="1" /></label><label>Follow button<input id="pad-follow" type="number" min="0" max="63" step="1" value="2" /></label><label>Pause button<input id="pad-pause" type="number" min="0" max="63" step="1" value="9" /></label><label>Boost button<input id="pad-boost" type="number" min="0" max="63" step="1" value="5" /></label><label>Pitch modifier button<input id="pad-pitch" type="number" min="0" max="63" step="1" value="6" /></label><label>Level pitch button<input id="pad-level" type="number" min="0" max="63" step="1" value="4" /></label><label>Brake button<input id="pad-brake" type="number" min="0" max="63" step="1" value="10" /></label></div>
+<p id="gamepad-axes" class="scenario-detail">No axes to display.</p>
+</details></section>
+<section>
+            <h2>Layers & places</h2>
+            <div id="london-controls" hidden>
+              <label>London area<select id="district"></select></label>
+              <button id="go-district">Explore this area</button>
+              <label class="toggle"><input id="basemap" type="checkbox" checked /> Base map · streets, water & parks</label>
+              <p id="map-status" class="scenario-detail">Preparing London map…</p>
+              <div class="map-style-control">
+                <span class="map-style-label">Buildings</span>
+                <div class="row segmented" role="group" aria-label="Building style"><button id="google-local" aria-pressed="true" disabled>OSM</button><button id="google-connect" aria-pressed="false">Photo</button></div>
+              </div>
+              <p id="google-config-note" class="scenario-detail">Google photorealistic 3D, like Million Robots.</p>
+              <p id="google-status" class="scenario-detail">Local London active. Select Photo for Google 3D imagery.</p>
+              <details>
+                <summary>Photo alignment</summary>
+                <label>Map ground alignment (m)<input id="google-ground" type="number" min="-100" max="500" step="1" value="46" title="Estimated ellipsoid height at the London origin; visual alignment only." /></label>
+                <p class="scenario-detail">Routes and heights use our local model. Use OSM for audits and saved views.</p>
+              </details>
+              <details>
+                <summary>Departures</summary>
+                <label>Departure site<select id="launch-site"></select></label>
+                <button id="watch-launch">Restart & watch takeoff</button>
+                <p id="launch-target" class="scenario-detail">30% ground/roof launch trips · 70% grouped roaming flights.</p>
+              </details>
+            </div>
+            <label class="toggle"><input id="buildings" type="checkbox" checked /><span id="buildings-label">Show city backdrop</span></label>
+          </section><section><h2>Validation</h2><details>
+              <summary>Validation & benchmarks</summary>
+              <p>GPU checks use the selected scene. Comparison uses Canary Wharf; scaling uses open sky.</p>
+              <button id="check">Check GPU flight</button><button id="city-bench">Compare city off / on · 10k</button><button id="bench">Benchmark 10k → 1M</button><button id="export" disabled>Export results</button>
+              <p id="test-status">No flight test run in this session.</p><pre id="results"></pre>
+            </details></section>
+<section>
+            <h2>Collision detection</h2>
+            <label class="toggle"><input id="collision-enabled" type="checkbox" /> Monitor drone contacts</label>
+            <details id="collision-controls">
+              <summary>Scope & limits</summary>
+              <label>Scope<select id="collision-scope"><option value="fleet">Whole fleet</option><option value="selected">Selected drone only</option></select></label>
+              <p class="scenario-detail">Rotor-bound snapshots, up to 5 checks per simulation second. Contacts ≈2.05 m; near band up to 4 m. No automatic avoidance or continuous-impact guarantee.</p>
+            </details>
+            <p id="collision-status" class="scenario-detail" aria-live="off">Off · flight paths continue unchanged.</p>
+          </section>
+<section>
+            <h2>Render</h2>
+            <div class="metric"><span>Frame rate</span><strong id="fps">—</strong></div>
+            <div class="metric"><span>Unique drawn</span><strong id="visible">—</strong></div>
+            <div class="metric"><span>Mesh / silhouette / marker</span><strong id="lods">—</strong></div>
+            <div class="metric"><span>Tracked GPU memory</span><strong id="memory">—</strong></div>
+
+          </section>
+        </div>
+      </aside>
+      <aside id="drone-tracker" aria-label="Drone 42 route map">
+        <canvas id="drone-route" aria-label="Drone 42 route, position and altitude profile"></canvas>
+        <p id="drone-route-summary" class="screen-reader-only">Tracking drone #42.</p>
+      </aside>
+    </main>
+    <main id="implementation-pages" class="implementation-pages" aria-label="Implementation guides" hidden><article id="menu-lod" class="guide-page" hidden><header class="guide-heading"><p class="eyebrow">IMPLEMENTATION GUIDE</p><h1 tabindex="-1">LOD</h1><p>How three stable drone designs share a GPU-driven level-of-detail pipeline.</p><a href="#/flights">← Back to 3D flights</a></header><div class="guide-grid"><section class="guide-card"><h2>Three designs, one stable fleet</h2><div class="model-reference"><img src="./drones/scifi-drone.png" alt="Sci-fi drone original model reference" loading="lazy" /><div class="drone-type"><strong>Sci-fi drone</strong><span id="type-count-0">—</span><small>360 triangles full · 36 silhouette · active IDs above</small></div></div><div class="model-reference"><img src="./drones/quadcopter-original.png" alt="Quadcopter original model reference" loading="lazy" /><div class="drone-type"><strong>Quadcopter</strong><span id="type-count-1">—</span><small>5,036 triangles full · 84 silhouette · active IDs above</small></div></div><div class="model-reference"><img src="./drones/inspection-drone.png" alt="Inspection drone original model reference" loading="lazy" /><div class="drone-type"><strong>Inspection drone</strong><span id="type-count-2">—</span><small>1,252 triangles full · 148 silhouette · active IDs above</small></div></div><p>Types are assigned by stable ID, independently of camera or quality. At one million: 333,334 sci-fi, 333,333 quadcopters and 333,333 inspection drones. Reference images show the original models; the runtime prepares their scale and rotors.</p><pre><code>type = id % 3;
+// The same ID keeps its design at every LOD.</code></pre></section><section class="guide-card"><h2>How detail is selected</h2><ol><li>Evaluate each active drone’s pose on the GPU.</li><li>Cull against six camera planes using the shared 1.027 m swept bound.</li><li>Estimate projected diameter in physical pixels.</li><li>Append its stable ID to the appropriate model or marker list.</li><li>Write indirect draw counts and reset counters for the next frame.</li></ol><pre><code>projectedPixels = (2 * radius * pixelsPerRadian) / distance;
+full: enter at 13.2 px, retain to 10.8 px
+silhouette: enter at 3.3 px, retain to 2.7 px
+otherwise: marker</code></pre><p>Hysteresis prevents flickering between levels. Shared caps allow at most 4,096 full models and 32,768 silhouettes. Overflow becomes markers; it does not reduce the active population.</p></section><section class="guide-card"><h2>GPU layout and resource ownership</h2><p>Seven fixed indirect draws render three full designs, three silhouettes and a shared marker draw. Per-type lists select matching geometry; aggregate counters report full / silhouette / marker / visible / overflow.</p><p>Bounded full/low lists plus one population-sized marker list use a source allocation formula of 72N bytes plus bounded list overhead, small counters, arguments and route tables. This is not a new measured memory result.</p><p>Geometry/materials and compute-only buffers are explicitly released. The pinned Three 0.186.1 storage bridge remains necessary.</p><p class="source-ref">Source: packages/render/src/index.ts · draw-layout.ts · release-storage.ts</p></section><section class="guide-card"><h2>What is verified</h2><p>Source tests check asset hashes, swept bounds, contact height, stable type counts and invalid draw-list cases. The browser audit includes all seven buckets and a 4,100-drone cap fixture.</p><p class="guide-caution">Mixed-fleet GPU execution, resource-lifetime results and repeated close/dense/sweep timings are pending. Historical 60 FPS overview results concern the earlier renderer.</p></section></div></article><article id="menu-paths" class="guide-page" hidden><header class="guide-heading"><p class="eyebrow">IMPLEMENTATION GUIDE</p><h1 tabindex="-1">Drone Paths</h1><p>How seeded routes, launch timetables and selected-drone guides are generated and evaluated.</p><a href="#/flights">← Back to 3D flights</a></header><div class="guide-grid"><section class="guide-card"><h2>The route data contract</h2><p>Flight maths uses local metres, Y up and seconds. A drone descriptor is 32 bytes; a sampled route point is 48 bytes. Packed start timestamps are milliseconds and convert explicitly to seconds.</p><pre><code>descriptor = [route, seed, phase, startMs, speed, offsetA, offsetB, flags];
+// Phase, speed and offsets occupy float-bit words.
+interval = min(floor(distance / spacing), sampleCount - 2);
+position = mix(sample0.position, sample1.position, fraction);</code></pre><p>Samples include position, tangent and frame data. Closed routes wrap at the seam; open routes clamp at their endpoint. CPU reference and GPU evaluation use the same packed contract.</p><p class="source-ref">Source: packages/core-types/src/index.ts · packages/flight/src/index.ts</p></section><section class="guide-card"><h2>London launch trips and roaming</h2><p>Exactly 30% of IDs belong to scheduled ground/roof launch trips. They wait, climb, travel, land, stop and return; departures are staggered over 120 seconds. The other 70% use 120 seeded roaming groups, each with four varied 3D paths.</p><p>Timetable routes use one virtual route unit per second. Flags distinguish scheduled starts and world X/Z scatter. Supporting ground/roof contact is explicit; ordinary roaming keeps its clearance margin.</p><p>Offline swept model checks are bound to the local London source hashes. Evicting a visual tile cannot change a flight path.</p><p class="guide-caution">Terrain estimates, authored paths and model clearance do not establish live obstacle avoidance, pad capacity or drone separation.</p><p class="source-ref">Source: tools/london/prepare-fleet.ts · packages/city/src/fleet.ts</p></section><section class="guide-card"><h2>The selected drone guide</h2><div class="metric"><span>Selected drone</span><strong id="selected-path-id">#42</strong></div><div class="metric"><span>Design</span><strong id="selected-path-type">Sci-fi drone</strong></div><p>One constant-size guide evaluates only the selected ID on the CPU. A blue WebGPU Line2 uses every packed route sample; a red point follows its effective pose. The label shows ID, location, model height, speed in km/h and Euler roll/pitch/yaw in degrees, updated at a bounded rate. Angles use YXZ order from the effective quaternion (pitch X, yaw Y, roll Z), including manual and returning poses.</p><p>Current widths: 4 px in 3D, 4 px on the mini-map and 6 px in the altitude profile. Geometry is replaced and disposed when selection changes.</p><p>During keyboard control, the blue line remains the planned route while the marker and telemetry follow the actual controlled pose.</p><p class="source-ref">Source: apps/sky/src/drone-tracker.ts · selected-route.ts</p></section></div></article><article id="menu-simulation" class="guide-page" hidden><header class="guide-heading"><p class="eyebrow">IMPLEMENTATION GUIDE</p><h1 tabindex="-1">Simulation</h1><p>How the clock, analytic GPU flight and single-ID keyboard pilot work together.</p><a href="#/flights">← Back to 3D flights</a></header><div class="guide-grid"><section class="guide-card"><h2>Frame flow</h2><div class="guide-flow"><span>Simulation clock</span><span>Selected pilot</span><span>GPU route poses</span><span>Culling + LOD</span><span>Indirect draws</span></div><p>All active IDs have positions regardless of visibility. Analytic route descriptors let the GPU evaluate movement without a per-drone CPU update, scene object or animation mixer.</p><pre><code>clock.timeMs += clamp(realDeltaMs, 0, 100) * timeScale;
+// Skip clock advancement while paused.
+GPU: integrate → classify → writeArgs → draw</code></pre><p>The current static-route runtime needs no worker. Stateful steering, dynamic scheduling and formation transitions remain separate future work.</p><p class="source-ref">Source: SimulationClock · createDroneRenderer · apps/sky/src/main.ts</p></section><section class="guide-card"><h2>Taking control of one ID</h2><p>Right-click selects a drone and opens Take control. Exactly one CPU pilot state supplies an ID/pose GPU uniform override. Takeover retains current position, orientation and velocity; it coasts until the first movement input or explicit brake. Z or left-stick press brakes smoothly. The integration pass applies that override before culling, picking and collision queries. It never creates a duplicate drone.</p><p>Fixed 1/60 s simulation ticks integrate the pilot. Holding movement or turn keys ramps their target over four simulation seconds; releasing or reversing resets that direction. Damping brakes on release; blur clears all held keys and ramps.</p><pre><code>horizontal: 12 → 32 m/s; Shift: 28 → 60 m/s
+vertical:    6 → 14 m/s; Shift: 10 → 24 m/s
+yaw:         1.5 → 2.4 rad/s
+pitch:       0.6 → 1.2 rad/s, limited to ±45°</code></pre><p>Escape blends the captured offset back to the moving route with a quintic transition. Body height stays below 1,200 model metres, with a conservative attitude-aware flat-ground floor (0.37 m when level). I/K pitches nose up/down; R levels it. Forward movement follows the pitched heading; strafe and independent climb remain available. Manual obstacle avoidance is not implemented.</p><p class="source-ref">Source: packages/flight/src/manual.ts · decision 0013</p></section><section class="guide-card"><h2>Gamepad input</h2><p>The browser Gamepad API reads the paired controller once per animation frame. Standard mapping uses left-stick axes 0/1 for strafe/forward and right-stick axes 2/3 for turn/climb. A/B/X/Start are button indices 0/1/2/9; RB (5) boosts. Hold LT (6) to redirect the right vertical stick from climb to pitch; LB (4) smoothly levels it. Unmapped devices require an explicit custom profile.</p><p>A 15% rescaled dead zone rejects stick drift. Action buttons fire only on press edges. Connection changes, blur, UI focus, page navigation and audits clear input; the controller must return to neutral before rearming. Keyboard input wins any axis it actively holds, so sources do not double speed.</p><p>The same single-ID pilot handles acceleration, pause, limits and return. Device loss brakes toward hover without creating another drone or snapping to its route.</p><p class="source-ref">Source: packages/flight/src/gamepad.ts · apps/sky/src/gamepad-controller.ts · <a href="https://www.w3.org/TR/gamepad/" target="_blank" rel="noopener">W3C Gamepad API</a></p><p class="guide-caution">Physical Logitech/browser mapping must be verified on the connected device. Bluetooth pairing is managed by the operating system.</p></section><section class="guide-card"><h2>Camera and selection</h2><p>Click picking runs only on demand. GPU passes find the nearest positive depth and resolve ties by stable ID, reading back eight bytes. Rendered buildings and nominal ground bound the pick ray.</p><p>Follow translates camera and target by the drone’s motion, preserving orbit angle and zoom. Pan map leaves Follow at the current view. Drags over five pixels do not count as clicks.</p><p>Map residency, quality and camera changes never change type assignment or active population. Page navigation changes visibility only; the running simulation remains owned by the flight viewer.</p></section><section class="guide-card"><h2>Acceptance status</h2><p>Source/build and generated-shader checks are separate from actual GPU execution. CPU/GPU poses, seams, counts, picking, disposal, sustained memory and performance require their recorded browser fixtures.</p><p class="guide-caution">Full M2 acceptance, mixed-fleet browser validation, wider devices, long soak and deployment remain pending.</p></section></div></article><article id="menu-collision" class="guide-page" hidden><header class="guide-heading"><p class="eyebrow">IMPLEMENTATION GUIDE</p><h1 tabindex="-1">Collision</h1><p>How the optional GPU contact monitor works, and where its guarantees stop.</p><a href="#/flights">← Back to 3D flights</a></header><div class="guide-grid"><section class="guide-card"><h2>Capped GPU snapshots</h2><p>The off-by-default monitor samples current GPU poses, at most five times per simulation second. It detects conservative rotor-sphere contacts and nearby neighbours; it does not move drones.</p><ol><li>Clear the hash-grid heads and six result counters.</li><li>Insert each pose into a 4 m cell using an atomic linked list.</li><li>Visit the 27 adjacent cells in 3D.</li><li>Compare centre distances and count pairs once.</li><li>Read back only counters.</li></ol><pre><code>cell = floor(position / 4); // floor matters for negative coordinates
+contactDistance = 2 * 1.027; // 2.054 m
+nearDistance = 4;
+maxVisitsPerQuery = 256;</code></pre><p class="source-ref">Source: packages/render/src/collisions.ts</p></section><section class="guide-card"><h2>Fleet and selected scopes</h2><p>Whole fleet queries every active ID. Selected scope queries only the tracked ID after constructing the same grid. Negative cells, vertical offsets and hash collisions are explicitly checked; actual cell coordinates filter hash aliases.</p><p>The selected pilot override is already present in the GPU pose buffer. All three prepared designs fit the same conservative sphere.</p><p>Dense cells can exhaust the work budget. The UI reports partial/lower-bound results instead of claiming zero contacts. Diagnostics release their buffers before pose resets using the pinned storage cleanup bridge.</p></section><section class="guide-card"><h2>What the numbers mean</h2><p>A rotor-sphere contact is a conservative possible contact, not mesh intersection. The near band is proximity. Snapshot checks can miss motion between samples.</p><p class="guide-caution">This is neither continuous collision detection nor automatic avoidance. It does not test buildings or Google tile geometry. Contact counts do not prove continuous separation.</p><p>Independent CPU fixtures cover contact, proximity, negative cells, height and truncation. Browser fixtures additionally verify GPU counters and allocation lifetime; current mixed-fleet execution remains pending.</p><a href="#/flights">Open the flight viewer to enable Collision detection</a></section></div></article><article id="menu-credit" class="guide-page" hidden><header class="guide-heading"><p class="eyebrow">IMPLEMENTATION GUIDE</p><h1 tabindex="-1">Credit</h1><p>Model, map, library and design origins, with preparation and licence details.</p><a href="#/flights">← Back to 3D flights</a></header><div class="guide-grid"><section class="guide-card"><h2>Drone models and preparation</h2><p><a href="https://www.innerscene.com/tools/library/3d-parts/low-poly-sci-fi-drone-c2568e13" target="_blank" rel="noopener">Sci-fi drone · Innerscene</a><br><a href="https://www.innerscene.com/tools/library/3d-parts/quadcopter-with-flight-electronics-a25968c1" target="_blank" rel="noopener">Quadcopter · Innerscene</a><br><a href="https://3dassets.dev/assets/orbital-field-station-landing-inspection-drone" target="_blank" rel="noopener">Inspection drone · 3DAssets.dev</a></p><p>All three originals are CC0 and remain unchanged. Preparation verifies SHA-256 hashes, merges geometry, bakes colours, reconstructs rotor pivots and creates matching silhouettes. Additional designs are uniformly demo-scaled and gear-aligned inside the shared clearance envelope.</p><p>The quadcopter pairs eight half-blades with four motor hubs. The inspection drone extracts four blade boxes and keeps its guards static.</p><p class="source-ref">Provenance: assets/drones/sources.json · generated prepared JSONs · drones/origins.json</p></section><section class="guide-card"><h2>London and live imagery</h2><p><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">Map data © OpenStreetMap contributors</a> · <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener">ODbL 1.0</a>.</p><p>The complete local derived map ships with source and per-tile hashes. Heights include defaults and ground is nominally flat. The database licence is separate from application code and drone assets.</p><p>Optional Google Photorealistic 3D Tiles use Cesium ion asset 2275207 after explicit connection. Google Maps and visible-tile provider attribution remain on the map. Imagery is never route or collision input and is not bundled for offline use.</p></section><section class="guide-card"><h2>Runtime and design origins</h2><p>Three.js 0.186.1 — MIT<br>3d-tiles-renderer 0.5.3 — Apache-2.0<br>Proj4js 2.22.0 — MIT<br>Draco — Apache-2.0</p><p>Theme and interaction patterns are adapted from the owner’s Million Robots reference. The reference checkout remains read-only and is not a build dependency. Its own code is not assigned an invented open-source licence.</p><a href="./licenses/README.md" target="_blank" rel="noopener">Runtime notices and asset origins</a><p class="source-ref">Licences and decoder hashes ship beside both builds.</p></section></div></article></main>
+    <footer class="statusbar">
+      <div><i></i><span id="status" role="status">Preparing rotor geometry and WebGPU flight…</span></div>
+      <span id="route-label">32 routes · GPU flight · individual IDs</span>
+      <span class="note">Synthetic routes · separation unvalidated</span>
+    </footer>
+    <div id="city-attribution"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">Map data © OpenStreetMap contributors · ODbL</a></div>
+    <div id="google-attribution" hidden aria-label="Google Maps 3D imagery attribution"><span>3D imagery</span><img id="google-logo" alt="Google Maps" /><span id="google-data-credit"></span></div>
+    <div id="drone-context-menu" class="drone-context-menu" role="menu" aria-labelledby="context-drone" hidden>
+      <div id="context-drone" class="context-title">Selected drone</div>
+      <button id="context-control" role="menuitem">Take control</button>
+      <p>Keyboard / gamepad flight · selected drone only</p>
+    </div>
+    <dialog id="info">
+      <button id="close-info" aria-label="Close">×</button>
+      <p class="eyebrow">ABOUT THIS EXPERIMENT</p>
+      <h2>One identity.<br />For every drone.</h2>
+      <p>
+        Every active drone has a stable ID and a position calculated on the GPU
+        along a sampled 3D route. Nearby drones use one of three prepared
+        designs with animated rotors. Distant drones use a simplified
+        silhouette or a small marker.
+      </p>
+      <p>
+        The sci-fi drone and quadcopter are by
+        <a
+          href="https://www.innerscene.com/tools/library/3d-parts/low-poly-sci-fi-drone-c2568e13"
+          target="_blank"
+          rel="noopener"
+          >Innerscene</a
+        >. The inspection drone is by 3DAssets.dev. All three are released under CC0.
+        Their meshes are merged and rotor pivots reconstructed for this demo.
+        The Credit tab links each original model.
+      </p>
+      <p>
+        These are planned visual flights. Greater London uses mapped roads,
+        building footprints, water and parks from OpenStreetMap. Building
+        heights include estimates and ground is flat. Thirty percent depart from
+        open ground or modeled roofs, travel to another site, land and return
+        after a stop. Seventy percent roam in groups along varied 3D paths.
+        Building clearance is checked, with intentional contact at launch
+        surfaces; live avoidance, drone separation, flight dynamics and
+        formation shows remain future work. Active and drawn counts are reported
+        separately.
+      </p>
+    </dialog>
+  </body>
+</html>

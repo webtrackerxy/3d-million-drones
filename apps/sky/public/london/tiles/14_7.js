@@ -1,0 +1,1 @@
+globalThis.__londonTileLoaded("14_7",{"key":"14_7","x":14,"z":7,"b":[],"r":[[2,[[321.6,364.1],[217.7,323.2]],"Dartford Bypass"],[2,[[217.7,323.2],[113.8,274.1]],"Dartford Bypass"],[2,[[113.8,274.1],[34.6,231.5]],"Dartford Bypass"],[2,[[34.6,231.5],[0,210.4]],"Dartford Bypass"]],"a":[]});

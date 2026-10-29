@@ -1,0 +1,20 @@
+{
+  "recorded": "2026-10-28",
+  "three": "0.186.1",
+  "tilesRenderer": "0.5.3",
+  "proj4": "2.22.0",
+  "files": [
+    {
+      "path": "apps/sky/public/draco/draco_wasm_wrapper.js",
+      "sha256": "8bb2952d2ba7d67e1414f8df819410cb0434a666be53f671fff75f68843d76f6"
+    },
+    {
+      "path": "apps/sky/public/draco/draco_decoder.wasm",
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "path": "assets/maps/google/google-maps-logo.png",
+      "sha256": "f542cdc1844d0e1a848455dffdc46a5cd618528576a4dba47bc4a096bfa4f60c"
+    }
+  ]
+}

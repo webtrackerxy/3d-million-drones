@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "licence": "CC0-1.0",
+  "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "licenceFile": "licences/CC0-1.0.txt",
+  "models": [
+    {
+      "id": "scifi-drone",
+      "name": "Low-poly Sci-fi Drone",
+      "author": "Innerscene",
+      "sourceUrl": "https://www.innerscene.com/tools/library/3d-parts/low-poly-sci-fi-drone-c2568e13",
+      "termsUrl": "https://www.innerscene.com/tools/library/terms",
+      "downloadUrl": "https://www.innerscene.com/api/library/low-poly-sci-fi-drone-c2568e13/download",
+      "file": "original/scifi-drone.glb",
+      "sha256": "b1e4c936cb50513550ce6c1dfc3e992afe6ba00595f8ca0e9623438d2c7ed1b5",
+      "licence": "CC0-1.0",
+      "modifications": "None. Original downloaded GLB."
+    },
+    {
+      "id": "quadcopter-original",
+      "name": "Quadcopter with flight electronics",
+      "author": "Innerscene",
+      "sourceUrl": "https://www.innerscene.com/tools/library/3d-parts/quadcopter-with-flight-electronics-a25968c1",
+      "termsUrl": "https://www.innerscene.com/tools/library/terms",
+      "downloadUrl": "https://www.innerscene.com/api/library/quadcopter-with-flight-electronics-a25968c1/download",
+      "file": "original/quadcopter-original.glb",
+      "sha256": "0d38b6f44eef969fe17f0c8a54d6747b7a0efb8a3b2e9ab875221d182a6dfb12",
+      "licence": "CC0-1.0",
+      "modifications": "None. Original downloaded GLB."
+    },
+    {
+      "id": "inspection-drone",
+      "name": "Landing inspection drone",
+      "author": "3D Assets / 3DAssets.dev",
+      "sourceUrl": "https://3dassets.dev/assets/orbital-field-station-landing-inspection-drone",
+      "termsUrl": "https://3dassets.dev/assets/orbital-field-station-landing-inspection-drone",
+      "downloadUrl": "https://cdn.3dassets.dev/assets/155/v1/model.glb",
+      "file": "original/inspection-drone.glb",
+      "sha256": "f491c297c434466d422faa2d9e9a8f897825ef6b5bab101ede027e3f6f7e92e7",
+      "licence": "CC0-1.0",
+      "aiMadePublisherLabel": true,
+      "modifications": "None. Original downloaded GLB."
+    }
+  ]
+}

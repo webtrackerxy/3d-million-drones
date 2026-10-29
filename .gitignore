@@ -1,0 +1,18 @@
+node_modules/
+.DS_Store
+*.tmp
+reports/model-tests/.server.log
+dist/
+.vercel/
+.release-output/
+*.bundle
+*.tsbuildinfo
+.env*
+!.env.example
+.vercel
+
+# Local development and internal release artifacts
+reports/
+docs/
+CONTEXT.md
+AGENTS.md

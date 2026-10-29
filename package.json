@@ -1,0 +1,58 @@
+{
+  "name": "million-drones",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "24.x"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "vite --config apps/sky/vite.config.ts",
+    "build": "yarn assets:prepare && vite build --config apps/sky/vite.config.ts && node tools/sky/build-offline.mjs",
+    "preview": "vite preview --config apps/sky/vite.config.ts",
+    "assets:prepare": "node tools/sky/prepare-drone.mjs && node tools/sky/prepare-fleet-models.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test packages/flight/src/*.test.ts packages/city/src/*.test.ts tools/sky/*.test.mjs tools/london/*.test.mjs",
+    "boundaries": "node tools/sky/check-boundaries.mjs",
+    "check": "yarn typecheck && yarn boundaries && yarn test",
+    "flight:extract": "node tools/sky/extract-report.mjs",
+    "models:download": "node tools/model-lab/download.mjs",
+    "models:check": "node tools/model-lab/validate.mjs",
+    "models:preview": "node tools/model-lab/build-preview.mjs",
+    "models:extract": "node tools/model-lab/extract-report.mjs",
+    "models:serve": "node tools/model-lab/serve.mjs",
+    "city:import": "node tools/city/import-canary-wharf.mjs",
+    "city:check-reports": "node tools/city/check-reports.mjs",
+    "city:import-roads": "node tools/city/import-roads.mjs",
+    "city:routes": "node --experimental-strip-types tools/city/prepare-navigation.ts",
+    "london:map": "node --max-old-space-size=6144 tools/london/build-map.mjs",
+    "london:overview": "node tools/london/overview.mjs",
+    "london:routes": "node --max-old-space-size=6144 --experimental-strip-types tools/london/prepare-routes.ts",
+    "london:sites": "node tools/london/select-launch-sites.mjs",
+    "london:fleet": "node --max-old-space-size=6144 --experimental-strip-types tools/london/prepare-fleet.ts",
+    "london:check-fleet": "node tools/london/check-fleet-report.mjs",
+    "selection:check-report": "node tools/sky/check-selection-report.mjs",
+    "london:check-reports": "node tools/london/check-reports.mjs",
+    "shaders:check": "node tools/sky/check-shaders.mjs"
+  },
+  "dependencies": {
+    "three": "0.186.1",
+    "3d-tiles-renderer": "0.5.3",
+    "proj4": "2.22.0"
+  },
+  "devDependencies": {
+    "gltf-validator": "2.0.0-dev.3.10",
+    "esbuild": "0.28.2",
+    "typescript": "6.0.3",
+    "vite": "8.3.0",
+    "@types/three": "0.186.0",
+    "@types/node": "24.13.6",
+    "pngjs": "7.0.0",
+    "polygon-clipping": "0.15.7"
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "region": "canary-wharf",
+  "origin": {
+    "crs": "EPSG:27700",
+    "easting": 537273,
+    "northing": 180348
+  },
+  "bboxWgs84": [
+    -0.0379,
+    51.4964,
+    -0.0091,
+    51.5144
+  ],
+  "localBoundsM": {
+    "minX": -972.8668762202142,
+    "maxX": 1075.1331237797858,
+    "minZ": -1074.2720688967383,
+    "maxZ": 973.7279311032617
+  },
+  "axes": "X east, Y up, Z south; metres",
+  "verticalDatum": "Nominal flat ground at local Y=0; NOT ODN/AMSL. No surveyed terrain.",
+  "sourceBuild": {
+    "source": "data/raw/greater-london-260927.osm.pbf",
+    "sourceMd5": "8986f11937511b34295e32846fccf341",
+    "tool": "@city/osm-pipeline, osmium 1.19.1",
+    "createdAt": "2026-09-29T10:33:56.902Z",
+    "attribution": "© OpenStreetMap contributors, ODbL"
+  },
+  "sourceManifestSha256": "28cf3b7e800380dce9f87d8bb90afa2de7f698df138cd5d2da51700a3c9bc698",
+  "sources": [
+    {
+      "file": "manifest.json",
+      "sha256": "28cf3b7e800380dce9f87d8bb90afa2de7f698df138cd5d2da51700a3c9bc698",
+      "bytes": 17970
+    },
+    {
+      "file": "tile_0_0.nav",
+      "sha256": "5230c10afc092c49a1222da801b7c1904ced3bc2f80b685dcf780f7a7b576cca",
+      "bytes": 33288
+    },
+    {
+      "file": "tile_1_0.nav",
+      "sha256": "b779027953c71f7e84db76221435c0d707f3c3dd50ace7fb75f1a76f918faa22",
+      "bytes": 9040
+    },
+    {
+      "file": "tile_2_0.nav",
+      "sha256": "a78f6c32c6cc326101a82b479820fac7427908c5c2c8feadefd01c955824e504",
+      "bytes": 2992
+    },
+    {
+      "file": "tile_3_0.nav",
+      "sha256": "63ec758199b40f6d204a0ba1b357322fe2e8b5e766a766f9fbc47ffaa6521bcb",
+      "bytes": 17016
+    },
+    {
+      "file": "tile_4_0.nav",
+      "sha256": "eb1d690ed27827d4551580fe9bc9655d7ab6f0e3ce5fa80c60967adb1ec6061b",
+      "bytes": 31888
+    },
+    {
+      "file": "tile_5_0.nav",
+      "sha256": "9526ca17e5fed200ad6b0b0a5939325cc4a5d46cd1d0591c491fbe68f3a7dada",
+      "bytes": 14304
+    },
+    {
+      "file": "tile_6_0.nav",
+      "sha256": "cfd01d7dd4169629565fc507dceb80d33c4fabc2bc62f5ddfba73a977c46f68f",
+      "bytes": 27096
+    },
+    {
+      "file": "tile_7_0.nav",
+      "sha256": "f3567b9d4db33510dde81634e5532a4ddea8c5b790b2e40ad5f4182781d08c78",
+      "bytes": 18944
+    },
+    {
+      "file": "tile_0_1.nav",
+      "sha256": "09658e44ac666905b272a76a2580d742b72c2214ed929444d42b0b715680e102",
+      "bytes": 42560
+    },
+    {
+      "file": "tile_1_1.nav",
+      "sha256": "5057405556e8ba753b21b45073586bc63eed3b5164fafd9a2aba776aad282f81",
+      "bytes": 13232
+    },
+    {
+      "file": "tile_2_1.nav",
+      "sha256": "fbb195ccd13291ce1e887ab0444fa594cba3ea3c556d54c205f28391c2687a82",
+      "bytes": 3136
+    },
+    {
+      "file": "tile_3_1.nav",
+      "sha256": "63d82065c3fac693fb2e9548dcc75c69b28cc2fa8e8c7e1c74f6dcd1c422ca49",
+      "bytes": 31184
+    },
+    {
+      "file": "tile_4_1.nav",
+      "sha256": "22a3c1b31d0ebdbe2435a0fb847284ec485056d63a8e587d481cdd96a016f12a",
+      "bytes": 19984
+    },
+    {
+      "file": "tile_5_1.nav",
+      "sha256": "aba19f23d944441ba1553024be1074ecdfa2fe445291495ac8d010a41143fd65",
+      "bytes": 18592
+    },
+    {
+      "file": "tile_6_1.nav",
+      "sha256": "eeda30fb1295d947ba6379635dcba82f514b0ae7b11690fb39d37b8f907142f4",
+      "bytes": 19960
+    },
+    {
+      "file": "tile_7_1.nav",
+      "sha256": "180fb87f6e6057d18061d39731d0ea342118ef047d36c4d5871cf8f018edcb14",
+      "bytes": 13648
+    },
+    {
+      "file": "tile_0_2.nav",
+      "sha256": "4c020cd678ef58a71436d41f4dee4416b3ad8df1ac8fd4542dea1023ddbc3a11",
+      "bytes": 20816
+    },
+    {
+      "file": "tile_1_2.nav",
+      "sha256": "95a259b4192d5168245d30b4f8be50c4ac6af3578bc343844698f821b895f7ad",
+      "bytes": 9136
+    },
+    {
+      "file": "tile_2_2.nav",
+      "sha256": "b1e616447226e19bfab5b273bc170ec0fd58df3fd6d1d39f5c4a10fa7f85d199",
+      "bytes": 4112
+    },
+    {
+      "file": "tile_3_2.nav",
+      "sha256": "42ef3d817d0f040abab07434bac9af62eb488cb0afd853771067e36627ec9cb5",
+      "bytes": 16584
+    },
+    {
+      "file": "tile_4_2.nav",
+      "sha256": "13fad980e4905ee638e84e5178bcab21e3f3a722d2499927294834fd1299042f",
+      "bytes": 14808
+    },
+    {
+      "file": "tile_5_2.nav",
+      "sha256": "fa4c8b970dedaed349bbfb715a7b33cb270cc7ceea645a6656b3920d43078cb7",
+      "bytes": 18512
+    },
+    {
+      "file": "tile_6_2.nav",
+      "sha256": "479ce088f891a7c9ca9a4148f2e474d9aa7272c84bac78aeccde255aa190fc65",
+      "bytes": 18952
+    },
+    {
+      "file": "tile_7_2.nav",
+      "sha256": "cfaeadc6ca1c7a41acc508e5e6054cbfca2882c958680bae436830b712ab034d",
+      "bytes": 11600
+    },
+    {
+      "file": "tile_0_3.nav",
+      "sha256": "42f63020128417634eaba888e3f75bc44c73c3c4429c8dc8779aa0032dee37c6",
+      "bytes": 23520
+    },
+    {
+      "file": "tile_1_3.nav",
+      "sha256": "7a33351e03b1a7eb9acde0d4bc89bab6f7f45724bb692dd3ff367f4bfd4b9124",
+      "bytes": 7352
+    },
+    {
+      "file": "tile_2_3.nav",
+      "sha256": "aa40b4f58aa6217b123d41650fb28249f4cbc320e47613d5bc4f616cf69ee62d",
+      "bytes": 9320
+    },
+    {
+      "file": "tile_3_3.nav",
+      "sha256": "85bcd4cba35174326faf93305afb60b857000d1606fb4b8bbb1b2bc62e6a2ef6",
+      "bytes": 17704
+    },
+    {
+      "file": "tile_4_3.nav",
+      "sha256": "a6e1a1ee799be647f2d4bb8ec4e5d92a0e3d35595bc1b764248568d75d204f5e",
+      "bytes": 23944
+    },
+    {
+      "file": "tile_5_3.nav",
+      "sha256": "7cf87efb4a7ca829615869d9d1bb836a22d9af03aba3cee8b7b69af24f7c1bd6",
+      "bytes": 20312
+    },
+    {
+      "file": "tile_6_3.nav",
+      "sha256": "64c7a1e87935b89a630315e3f0f8b060a1326700fb37bf1592bfcafd541e26bf",
+      "bytes": 22000
+    },
+    {
+      "file": "tile_7_3.nav",
+      "sha256": "267e61f93a20045145e8c682be16a1839d44b2cd96628d637a2a981c6c9e43e1",
+      "bytes": 11832
+    },
+    {
+      "file": "tile_0_4.nav",
+      "sha256": "00d815166f6d491a865872d05b12f54b9a930230f4397318d89d13ce65f13338",
+      "bytes": 13776
+    },
+    {
+      "file": "tile_1_4.nav",
+      "sha256": "eb5d78287312db2c6d578941d7b874a70cda31af1edf06e80de2388720ed7471",
+      "bytes": 3648
+    },
+    {
+      "file": "tile_2_4.nav",
+      "sha256": "c77567517e2b263ee9887e8794489e80e29cfe8aa6db96f5533b4f55a894adcb",
+      "bytes": 20392
+    },
+    {
+      "file": "tile_3_4.nav",
+      "sha256": "c98a5592a8d40b9a9fa3b7b358594306d67fd935b934ea07e767211e3604bc96",
+      "bytes": 15032
+    },
+    {
+      "file": "tile_4_4.nav",
+      "sha256": "c4911051984cdb7c145cb9af52dd11eb90e8644eb40f8cf98590410fb3c43e05",
+      "bytes": 12080
+    },
+    {
+      "file": "tile_5_4.nav",
+      "sha256": "a1cbf8dd9bf3b6ab06d6634315cf7001d57366472c88c5b1b5273c0c8daedfca",
+      "bytes": 14792
+    },
+    {
+      "file": "tile_6_4.nav",
+      "sha256": "891f214d4bb49407b0ed92d13c40d651a1599d6da7abe09b89d84429f24ec3cb",
+      "bytes": 4736
+    },
+    {
+      "file": "tile_7_4.nav",
+      "sha256": "be1fe9be1dfe91f105641707efe3d9118fd8cd65e6c02134ead5600c17e4d827",
+      "bytes": 10776
+    },
+    {
+      "file": "tile_0_5.nav",
+      "sha256": "d47c92d92faee4fdc687f0c95df70745613183168c02c70e1914b86e6c26f8d0",
+      "bytes": 23208
+    },
+    {
+      "file": "tile_1_5.nav",
+      "sha256": "3b7aadea7ea2c5378a20ca10d7a9cc279689b18cbe80c69f849ad3583c970236",
+      "bytes": 23360
+    },
+    {
+      "file": "tile_2_5.nav",
+      "sha256": "a6573d89d86888bad3f91fed8340e4033987ffa4a2bcf79556681edd2d8ee2eb",
+      "bytes": 35168
+    },
+    {
+      "file": "tile_3_5.nav",
+      "sha256": "81e7ad1e154b709ee8f3f59ff118eaa7cc6fc37228793a8d632577e75909e0d8",
+      "bytes": 26976
+    },
+    {
+      "file": "tile_4_5.nav",
+      "sha256": "0fe0dc26cb1bad182a06f0ade1567c4c825a1d6a44aa8bf9b581c345da723d94",
+      "bytes": 21912
+    },
+    {
+      "file": "tile_5_5.nav",
+      "sha256": "3c2bdc44a11d430accc07d19c14048969f9311ea0559e3f342d02f41912a754b",
+      "bytes": 23024
+    },
+    {
+      "file": "tile_6_5.nav",
+      "sha256": "e5210ff84acf2ee3728581d5ffbd42ebaf34d00da69f38846b0aa35efa66fbc7",
+      "bytes": 17296
+    },
+    {
+      "file": "tile_7_5.nav",
+      "sha256": "4d0e967243ddedd47ded6e4ff02458c7a392cab13a632392397d40ae809c9fb6",
+      "bytes": 15848
+    },
+    {
+      "file": "tile_0_6.nav",
+      "sha256": "3d154c0feef174beabea1b8a644ec61f0740df31aae916f2bf3112e8bf8a6db7",
+      "bytes": 28768
+    },
+    {
+      "file": "tile_1_6.nav",
+      "sha256": "b8d61bfb99e843ca83f8f396cbd0e1bc17abf5c79819023bf3f30f66242fd3b4",
+      "bytes": 25160
+    },
+    {
+      "file": "tile_2_6.nav",
+      "sha256": "8a31c2baea7f226afe48d3cb3d8f2b70e2e63f6db24789664974ca25c40825fe",
+      "bytes": 29784
+    },
+    {
+      "file": "tile_3_6.nav",
+      "sha256": "3ee91ad811395fd38f1fd3e152421f7131f0933f936f5861e006f9c8326b0fe9",
+      "bytes": 25776
+    },
+    {
+      "file": "tile_4_6.nav",
+      "sha256": "8787880889a25216e6e4d2eabef84c4a896596f0c8f8157c3d03d1e94dee6977",
+      "bytes": 27840
+    },
+    {
+      "file": "tile_5_6.nav",
+      "sha256": "a82edf98f810061af17c23d57ddd58578733ee21d75a57d96ce5bf3b7b0ae6e4",
+      "bytes": 30664
+    },
+    {
+      "file": "tile_6_6.nav",
+      "sha256": "75c7fd178fa7fcd2f9111175a198a8f390cefb7049cbb71737ef62c8cbb767b6",
+      "bytes": 26544
+    },
+    {
+      "file": "tile_7_6.nav",
+      "sha256": "ea53bcae356b9d68a0c33b17cbf91d7f24ab4fa22393bb18a5b0270cbac3aacf",
+      "bytes": 21208
+    },
+    {
+      "file": "tile_0_7.nav",
+      "sha256": "13e3fc52f56d005f04da28c0a62c27e2ce89c34040cbdbabe59384dee6b72c9e",
+      "bytes": 13264
+    },
+    {
+      "file": "tile_1_7.nav",
+      "sha256": "cc6997d000d6e70ec0beb044bf0ffa4dd1e5912b43c37ccfd28d33826e0c4a16",
+      "bytes": 13128
+    },
+    {
+      "file": "tile_2_7.nav",
+      "sha256": "1b2bf3de3389ac3962f69d32d37b46a0633a0f901502af6748f5eadbad587262",
+      "bytes": 16976
+    },
+    {
+      "file": "tile_3_7.nav",
+      "sha256": "53711c63411480004d56e96e065d5cb5402482e3780665a97b5501d821404f8e",
+      "bytes": 19784
+    },
+    {
+      "file": "tile_4_7.nav",
+      "sha256": "7c164af0c5706134c885c2c2fd5c330a32bf4add9c44b0767b11de00280fa956",
+      "bytes": 13400
+    },
+    {
+      "file": "tile_5_7.nav",
+      "sha256": "0805bb9aa856497ab9075027a5fc7d7352c6c0f1332ff4120a5faa002098fb36",
+      "bytes": 10240
+    },
+    {
+      "file": "tile_6_7.nav",
+      "sha256": "eb130b0f0d4551efc0e32a4e718f1bddeb1adc1190d8aa00776ef810700db638",
+      "bytes": 14536
+    },
+    {
+      "file": "tile_7_7.nav",
+      "sha256": "194a5cc89ff6216b69e6033ba3dab7c8b40f6f96901d3185b373a0e0ef7e41d3",
+      "bytes": 8888
+    }
+  ],
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "transformations": "Read building outer rings and tops from 64 source tiles; add tile offsets; north becomes negative Z; round to 0.01 m; omit virtual nodes and parent outlines with parts. No pedestrian graph or source code copied.",
+  "limitations": [
+    "Source heights include tags, levels and defaults; incomplete/unverified real-world obstacles.",
+    "Outer rings only; no terrain, water polygons, textures, roof shapes or building holes.",
+    "Buildings crossing tile edges may extend outside the tile grid."
+  ],
+  "buildings": 2416,
+  "excluded": 72,
+  "maxRoofM": 235,
+  "defaultHeightBuildings": 1077,
+  "data": {
+    "file": "buildings.json",
+    "sha256": "b36c523b54f480120b7df4e6d397cc27281b98f208bd5d285c189df34ab3746b",
+    "bytes": 485523
+  }
+}

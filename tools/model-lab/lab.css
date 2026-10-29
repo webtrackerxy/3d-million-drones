@@ -1,0 +1,160 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #eaf0f8;
+  background: #0c1420;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: end;
+  padding: 30px 36px 20px;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #8dd5bb;
+  margin: 0 0 10px;
+}
+h1 {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 550;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.intro {
+  max-width: 430px;
+  color: #a6b7cb;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+main {
+  padding: 0 28px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+}
+#model-buttons {
+  display: contents;
+}
+button,
+select {
+  border: 1px solid #344257;
+  color: #dce9f5;
+  background: #152234;
+  padding: 9px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:hover,
+button:focus-visible,
+select:focus-visible {
+  background: #253d54;
+  outline: 2px solid #87d5bd;
+  outline-offset: 2px;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+#test {
+  margin-left: auto;
+  color: #0b241e;
+  background: #9fe5cc;
+  border-color: #9fe5cc;
+}
+label {
+  font-size: 12px;
+  color: #acbed3;
+}
+#status {
+  margin: 4px 0 12px;
+  color: #a9cbbd;
+  font-size: 13px;
+}
+#viewport {
+  width: 100%;
+  height: min(55vh, 520px);
+  min-height: 300px;
+  border: 1px solid #29384a;
+  border-radius: 10px;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 14px 0;
+}
+article {
+  border: 1px solid #29384a;
+  background: #101d2c;
+  padding: 16px;
+  border-radius: 8px;
+}
+article h2 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 550;
+}
+article p {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #b2c4d7;
+  margin: 6px 0;
+}
+a {
+  color: #9fe5cc;
+}
+details {
+  padding: 12px 0;
+  color: #b7c8da;
+  font-size: 13px;
+}
+pre {
+  white-space: pre-wrap;
+  max-height: 360px;
+  overflow: auto;
+  font-size: 11px;
+}
+footer {
+  padding: 14px 28px 24px;
+  color: #7d91a9;
+  font-size: 11px;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  header {
+    display: block;
+    padding: 24px;
+  }
+  .intro {
+    margin-top: 14px;
+  }
+  main {
+    padding: 0 16px;
+  }
+  #cards {
+    grid-template-columns: 1fr;
+  }
+  #test {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Million Drones · Model Lab</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/lab.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/vendor/three/build/three.webgpu.js",
+          "three/webgpu": "/vendor/three/build/three.webgpu.js",
+          "three/addons/": "/vendor/three/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="/lab.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="eyebrow">MILLION DRONES / ASSET CHECK</p>
+        <h1>Three candidates. One sky.</h1>
+      </div>
+      <p class="intro">
+        Original CC0 models, loaded locally. Drag to orbit. This checks assets;
+        it is not a million-drone benchmark.
+      </p>
+    </header>
+    <main>
+      <nav aria-label="Model and view controls">
+        <button id="all">Compare all</button>
+        <span id="model-buttons"></span>
+        <label
+          >View
+          <select id="view">
+            <option value="above">Above</option>
+            <option value="front">Front</option>
+            <option value="below">Below</option>
+          </select></label
+        >
+        <button id="test">Run browser checks</button>
+        <button id="export" disabled>Export test JSON</button>
+        <button id="export-bundle" disabled>Export report with images</button>
+        <button id="export-image" disabled>Open contact sheet</button>
+      </nav>
+      <p id="status" role="status">
+        Loading WebGPU renderer and original models…
+      </p>
+      <div id="viewport"></div>
+      <section id="cards" aria-label="Model details"></section>
+      <details>
+        <summary>Browser test results</summary>
+        <pre id="results">No browser test has run.</pre>
+      </details>
+    </main>
+    <footer>
+      Display scale is normalised for comparison; original files are preserved.
+      Sources and CC0 terms are linked in each card.
+    </footer>
+  </body>
+</html>

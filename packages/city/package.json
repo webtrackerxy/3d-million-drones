@@ -1,0 +1,1 @@
+{"name":"@drones/city","private":true,"type":"module","version":"0.0.0","exports":"./src/index.ts","dependencies":{"@drones/core-types":"0.0.0","@drones/flight":"0.0.0"}}

@@ -1,0 +1,23 @@
+{
+  "origin": "Existing model-lab original-model captures, 2026-10-26. All three model originals are CC0; see assets/drones/sources.json.",
+  "images": [
+    {
+      "file": "scifi-drone.png",
+      "origin": "reports/model-tests/scifi-drone-front.png",
+      "sha256": "247aa24a6c17d32252158b51d50f921d8054680b2865323c494e46526342794e",
+      "scope": "Original-model reference capture; not a mixed-fleet GPU acceptance result"
+    },
+    {
+      "file": "quadcopter-original.png",
+      "origin": "reports/model-tests/quadcopter-original-front.png",
+      "sha256": "4f5a9f7e65c72f5bc45e35559121c9fd91ed392d0700fab9975f59a932901ae5",
+      "scope": "Original-model reference capture; not a mixed-fleet GPU acceptance result"
+    },
+    {
+      "file": "inspection-drone.png",
+      "origin": "reports/model-tests/inspection-drone-front.png",
+      "sha256": "64cff69ef2a1122745ffaf46a46b9349e07d18e03c5413155b0265b7d13e6d11",
+      "scope": "Original-model reference capture; not a mixed-fleet GPU acceptance result"
+    }
+  ]
+}
