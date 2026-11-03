@@ -4,8 +4,12 @@ Experimental desktop WebGPU demo of **1,000,000 individual drones** over Greater
 Three stable designs share GPU route evaluation, culling, level of detail and indirect draws.
 
 Initial version: **v0.1.0 (experimental prerelease)**.
+
 Website: https://3d-million-drones.vercel.app
-Source: https://github.com/webtrackerxy/3d-million-drones
+
+https://github.com/user-attachments/assets/103c0af9-73b0-42dc-b603-403b7aadfd83
+
+
 
 ## Documentation
 
