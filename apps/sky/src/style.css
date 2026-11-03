@@ -46,6 +46,8 @@ a { color: var(--accent); }
 .topbar-title { font-weight: 600; margin-right: 12px; color: var(--ink); text-decoration: none; }
 .topbar-view { padding: 6px 10px; border-radius: 6px; background: rgb(77 217 230 / 0.14); }
 .topbar button { border: 0; color: var(--muted); }
+.topbar-repo { padding: 6px 9px; font-size: 11px; color: var(--muted); text-decoration: none; border-radius: 6px; white-space: nowrap; }
+.topbar-repo:hover { color: var(--accent); background: var(--line); }
 .live { margin-left: auto; display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
 .live i, .statusbar i { display: inline-block; width: 6px; height: 6px; flex: none; border-radius: 50%; background: var(--accent); }
 .panel {
