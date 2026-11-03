@@ -3,6 +3,12 @@
 Experimental desktop WebGPU demo of **1,000,000 individual drones** over Greater London.
 Three stable designs share GPU route evaluation, culling, level of detail and indirect draws.
 
+This is the third of my million-scale city demos:
+
+1. [3D City Million Robots](https://github.com/webtrackerxy/3d-city-million-robots)
+2. [3D City Million Cars](https://github.com/webtrackerxy/3d-city-million-cars)
+3. Million Drones (this repository)
+
 Initial version: **v0.1.0 (experimental prerelease)**.
 
 Website: https://3d-million-drones.vercel.app
